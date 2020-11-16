@@ -1,0 +1,17 @@
+package org.jboss.qa.ba.scesim;
+
+rule "Apply available promotions globally"
+when
+    $p: Promotion($discountRate: discountRate, ticketTypes.empty == true)
+    $t: Ticket($ticketPrice: price != null)
+then
+    $t.setPrice((100-$discountRate)/100 * $ticketPrice);
+end
+
+rule "Apply available promotions based on type"
+when
+    $p: Promotion($discountRate: discountRate, ticketTypes.empty == false, $appliesTo: ticketTypes)
+    $t: Ticket($ticketPrice: price != null, $appliesTo contains type)
+then
+    $t.setPrice( (100 - $discountRate) / 100 * $ticketPrice);
+end

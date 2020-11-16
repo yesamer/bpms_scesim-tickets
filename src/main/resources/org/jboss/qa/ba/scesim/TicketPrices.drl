@@ -1,0 +1,33 @@
+package org.jboss.qa.ba.scesim;
+
+rule "child ticket"
+when
+    $t: Ticket ( price==null, type==TicketType.CHILD )
+then
+    $t.setPrice(5.0);
+    update($t)
+end
+    
+rule "student ticket"
+when
+    $t: Ticket ( price==null, type==TicketType.STUDENT )
+then
+    $t.setPrice(7.0);
+    update($t)
+end
+
+rule "adult ticket"
+when
+    $t: Ticket ( price==null, type==TicketType.ADULT )
+then
+    $t.setPrice(10.0);
+    update($t)
+end
+
+rule "senior ticket"
+when
+    $t: Ticket ( price==null, type==TicketType.SENIOR )
+then
+    $t.setPrice(5.0);
+    update($t)
+end
